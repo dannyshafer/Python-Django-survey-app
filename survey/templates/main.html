@@ -1,0 +1,65 @@
+<html>
+<head>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+</head>
+<body>
+  <style type="text/css">
+  .centerdv {
+    margin-top: 5%;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+  }
+  .formcss {
+    margin-top: 5%;
+    margin-bottom: 5%;
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+  }
+  </style>
+  <div class="jumbotron container centerdv">
+    <h1>Simply Survey Site</h1>
+    <p>Take Surveys Here</p>
+    <p>
+      <a class="btn  btn-primary btn-lg" role="button" data-toggle="modal" data-target="#surveyIDmodal">Take a Survey</a>
+      <a class="btn btn-info btn-lg" role="button" data-toggle="modal" data-target="#adminLoginModal">Admin Login</a>
+    </p>
+  </div>
+  <div class="modal fade" role="dialog" id="surveyIDmodal">
+    <div class="modal-dialog modal-sm">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4>Enter a Survey ID</h4>
+        </div>
+        <form method = "post" class="formcss" action={% url 'load-survey' %}>
+          {% csrf_token %}
+          <input type="text" class="form-content" name="survey_view"><br>
+          <input type="text" class="btn btn-success" value="Go!">
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" role="dialog" id="adminLoginModal">
+    <div class="modal-dialog modal-sm">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4>Login as Admin User</h4>
+        </div>
+        <form method = "post" class="formcss" action={% url 'admin-login' %}>
+          {% csrf_token %}
+          <p>Username:</p>
+          <input type="text" class="form-content" name="username"><br>
+          <p>Password:</p>
+          <input type="password" class="form-content" name="password"><br>
+          <input type="text" class="btn btn-success" value="Login!">
+        </form>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

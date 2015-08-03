@@ -1,0 +1,46 @@
+<html>
+<head>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+</head>
+<body>
+  <style type="text/css">
+  .centerdv {
+    margin-top: 5%;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+  }
+  .formcss {
+    margin-top: 5%;
+    margin-bottom: 5%;
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+  }
+  </style>
+  <div class="jumbotron container centerdv">
+    <h2>{{survey.title}}</h2>
+  </div>
+  <form method="post" action={% url 'fill-survey' %}>
+    <input type="hidden" name="survey_id" value = {{survey.id}}>
+    {% csrf_token %}
+    {% for question in questions %}
+    <div class="container centerdv">
+      <div class="well page-header">
+        <b>{{question.question_text}}</b>
+      </div>
+      {% for choice in question.choice_set.all %}
+        <label class="radio inline">
+          <input type="radio" name="question{{question.id}}" value="{{choice.id}}">
+          {{choice.choice_text}}
+        </label>
+      {% endfor %}
+    </div>
+    {% endfor %}
+    <input type="submit" class="btn btn-success btn-lg" value="Complete!">
+  </form>
+</body>
+</html>
